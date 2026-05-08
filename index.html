@@ -797,7 +797,7 @@
     <div class="timeline-item reveal">
       <div class="timeline-dot"></div>
       <div class="timeline-meta">JANUARY 2026 — PRESENT</div>
-      <div class="timeline-role">Data Plane Lead — UIMP</div>
+      <div class="timeline-role">Backend &amp; Integration Engineer — UIMP</div>
       <div class="timeline-company">Accenture Research and Development · Universal Integration Migration Platform</div>
       <span class="badge badge-lead">⭐ Leading Data Plane</span>
       <span class="badge badge-promo">⬆ Promoted December 2025</span>
@@ -807,22 +807,26 @@
         <p style="font-size:14.5px; color:var(--text); margin-bottom:14px; line-height:1.7; font-style:italic;">
           Developed an <strong>any-to-any iPaaS migration platform</strong> at <strong>Accenture Research and Development</strong> that automates the migration of integration workflows across <strong>150+ heterogeneous integration platforms</strong>, using AI-driven agents and event-driven orchestration.
         </p>
+        <p style="font-size:13.5px; color:var(--text-muted); margin-bottom:14px; line-height:1.7;">
+          Contributed across multiple core areas of the platform:
+        </p>
         <ul class="project-bullets">
-          <li><strong>Led the Data Plane end-to-end</strong> — owned design, implementation, and delivery of the entire write-path event publishing infrastructure powering all UIMP agents.</li>
-          <li>Architected and built the <strong>uimp-agent-txn-core SDK</strong> on Spring Boot — a production-grade library that consolidates ~40 infrastructure concerns previously duplicated across 14 agents.</li>
-          <li>Designed a <strong>3-library SDK architecture</strong> (Foundation + TXN Core + CPA Core) with strict dependency boundaries to enforce separation between the data plane, control plane, and shared utilities.</li>
-          <li>Implemented Java 21 <strong>ScopedValue</strong>-based correlation propagation, K8s-aware mTLS auto-discovery with hot-reload, and a partitioned transactional outbox with parallel pollers.</li>
-          <li>Defined 9 canonical event types with strict schema validation, eliminating an entire class of production bugs from typos, missing fields, and prohibited payload data.</li>
-          <li>Built RabbitMQ publisher infrastructure with quorum queues, async pipelined confirms, lock-free channel pools, and graceful 3-state shutdown — sustaining 10,000+ msg/sec per instance.</li>
+          <li><strong>Data Plane Leadership</strong> — led the Data Plane, one of the major components of UIMP, driving the implementation and delivery of the write-path event publishing infrastructure that powers all UIMP agents.</li>
+          <li><strong>Generator–Evaluator–Optimiser Pattern</strong> — worked on the iterative AI refinement framework that powers UIMP's migration accuracy: a generator produces candidate outputs, an evaluator scores them against rubrics, and an optimiser refines until acceptance criteria are met.</li>
+          <li><strong>RabbitMQ Message Broker</strong> — built and tuned the publisher infrastructure with quorum queues, async pipelined publisher confirms, lock-free channel pools, and graceful 3-state shutdown — sustaining 10,000+ msg/sec per instance with mTLS-secured connections.</li>
+          <li><strong>Event-Driven Architecture</strong> — contributed to the event streaming backbone that decouples UIMP's pipeline stages (ingest → generate → evaluate → optimise → publish), enabling parallelism, retries, asynchronous processing, and scalable fan-out across agents.</li>
+          <li><strong>SDK Development</strong> — worked on the <strong>uimp-agent-txn-core SDK</strong> on Spring Boot, a production-grade library that consolidates ~40 infrastructure concerns previously duplicated across 14 agents; contributed to the 3-library structure (Foundation + TXN Core + CPA Core).</li>
+          <li><strong>Schema Validation &amp; Reliability</strong> — implemented strict schema validation across canonical event types and Java 21 ScopedValue-based correlation propagation, eliminating an entire class of production bugs from typos, missing fields, and prohibited payload data.</li>
         </ul>
         <div class="project-stack">
           <span class="stack-tag">Java 21</span>
           <span class="stack-tag">Spring Boot</span>
           <span class="stack-tag">RabbitMQ</span>
           <span class="stack-tag">Apache Camel</span>
-          <span class="stack-tag">Kubernetes</span>
-          <span class="stack-tag">mTLS</span>
+          <span class="stack-tag">Event-Driven</span>
+          <span class="stack-tag">Gen-Eval-Opt</span>
           <span class="stack-tag">SDK Design</span>
+          <span class="stack-tag">mTLS</span>
         </div>
       </div>
     </div>
@@ -842,7 +846,7 @@
           <li>Implemented Apache Kafka for event streaming across pipeline stages (ingest → generate → evaluate → optimise → publish), enabling parallelism and high throughput.</li>
           <li>Used Minio as an artifact store for source inputs, intermediate versions, and generated outputs with full traceability and re-run support.</li>
           <li>Deployed the platform on Kubernetes for consistent environments, autoscaling, and safe rollouts.</li>
-          <li>Created prompt templates and evaluation rubrics to reduce hallucinations and standardize generated outputs.</li>
+          <li>Created prompt templates and evaluation rubrics to reduce hallucinations and standardise generated outputs.</li>
         </ul>
         <div class="project-stack">
           <span class="stack-tag">OpenAI</span>
@@ -921,7 +925,7 @@
     <div class="achieve-card reveal">
       <div class="achieve-icon">🏅</div>
       <div class="achieve-title">Gold Medalist</div>
-      <div class="achieve-desc">First Rank in B.Tech — GITAM School of Technology, recognized for academic excellence with a 9.71 CGPA.</div>
+      <div class="achieve-desc">First Rank in B.Tech — GITAM School of Technology, recognised for academic excellence with a 9.71 CGPA.</div>
     </div>
     <div class="achieve-card reveal">
       <div class="achieve-icon">🎖️</div>
