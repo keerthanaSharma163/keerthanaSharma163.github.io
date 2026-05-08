@@ -348,6 +348,19 @@
     transition: border-color .2s;
   }
   .project-block:hover { border-color: var(--accent); }
+  .project-role-label {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .5px;
+    color: var(--text-muted);
+    background: var(--accent-soft);
+    padding: 4px 10px;
+    border-radius: 3px;
+    margin-bottom: 12px;
+    border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+  }
   .project-title {
     font-family: 'Lora', serif;
     font-weight: 600;
@@ -793,15 +806,18 @@
 
   <div class="timeline">
 
-    <!-- UIMP — current/most recent -->
+    <!-- ACCENTURE — single entry with all projects -->
     <div class="timeline-item reveal">
       <div class="timeline-dot"></div>
-      <div class="timeline-role">Backend &amp; Integration Engineer — UIMP</div>
-      <div class="timeline-company">Accenture Research and Development · Universal Integration Migration Platform</div>
-      <span class="badge badge-lead">⭐ Leading Data Plane</span>
+      <div class="timeline-meta">JUNE 2024 — PRESENT</div>
+      <div class="timeline-role">Accenture</div>
+      <div class="timeline-company">Research and Development · India</div>
+      <span class="badge badge-lead">⭐ Leading Data Plane — UIMP</span>
       <span class="badge badge-promo">⬆ Promoted December 2025</span>
 
+      <!-- UIMP Project (Current — Analyst) -->
       <div class="project-block">
+        <span class="project-role-label">CURRENT · BACKEND &amp; INTEGRATION ENGINEER</span>
         <div class="project-title">▸ UIMP — Universal Integration Migration Platform</div>
         <ul class="project-bullets">
           <li><strong>Any-to-Any iPaaS Migration Platform</strong> — implemented an any-to-any iPaaS migration platform at <strong>Accenture Research and Development</strong> capable of migrating across <strong>150+ iPaaS platforms</strong>.</li>
@@ -818,15 +834,10 @@
           <span class="stack-tag">SDK Design</span>
         </div>
       </div>
-    </div>
 
-    <!-- Accenture promoted -->
-    <div class="timeline-item reveal">
-      <div class="timeline-dot"></div>
-      <div class="timeline-role">Packaged App Development Analyst</div>
-      <div class="timeline-company">Accenture</div>
-
+      <!-- MARS Project (Analyst) -->
       <div class="project-block">
+        <span class="project-role-label">PACKAGED APP DEVELOPMENT ANALYST</span>
         <div class="project-title">▸ Project MARS — MuleSoft → Azure Integration Services Migration</div>
         <ul class="project-bullets">
           <li>Developed an AI-assisted migration solution converting MuleSoft projects into Azure Integration Services (AIS) artifacts using OpenAI/ChatGPT.</li>
@@ -844,15 +855,10 @@
           <span class="stack-tag">Azure</span>
         </div>
       </div>
-    </div>
 
-    <!-- Associate -->
-    <div class="timeline-item reveal">
-      <div class="timeline-dot"></div>
-      <div class="timeline-role">Packaged App Development Associate</div>
-      <div class="timeline-company">Accenture</div>
-
+      <!-- IMA Project (Associate) -->
       <div class="project-block">
+        <span class="project-role-label">PACKAGED APP DEVELOPMENT ASSOCIATE</span>
         <div class="project-title">▸ Project IMA — TIBCO → Apache Camel Migration (PoC)</div>
         <ul class="project-bullets">
           <li>Built a PoC to migrate integration workflows from TIBCO to Apache Camel by generating route templates, mappings, and transformation logic using OpenAI/LLMs.</li>
@@ -868,6 +874,7 @@
           <span class="stack-tag">Java</span>
         </div>
       </div>
+
     </div>
 
   </div>
