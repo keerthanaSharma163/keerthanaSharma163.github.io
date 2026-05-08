@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Karanam Keerthana Sharma — Backend & Integration Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  /* ── DARK THEME (default) ── */
+  :root[data-theme="dark"] {
+    --bg: #0c1219;
+    --surface: #131c26;
+    --card: #18222e;
+    --border: #243240;
+    --border-soft: #1d2935;
+    --text: #e8edf2;
+    --text-muted: #8a9aa8;
+    --accent: #4a90c8;
+    --accent-soft: rgba(74, 144, 200, 0.12);
+    --accent-strong: #6ba8d9;
+    --highlight: #c9a96e;
+    --highlight-soft: rgba(201, 169, 110, 0.12);
+    --shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  /* ── LIGHT THEME ── */
+  :root[data-theme="light"] {
+    --bg: #f8f6f1;
+    --surface: #ffffff;
+    --card: #ffffff;
+    --border: #d9d4ca;
+    --border-soft: #e8e3d8;
+    --text: #1c2530;
+    --text-muted: #5a6878;
+    --accent: #1e5a8a;
+    --accent-soft: rgba(30, 90, 138, 0.08);
+    --accent-strong: #154770;
+    --highlight: #8b6914;
+    --highlight-soft: rgba(139, 105, 20, 0.1);
+    --shadow: 0 2px 12px rgba(28,37,48,0.08);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+    transition: background-color .3s ease, color .3s ease;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Lora', Georgia, serif;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 60px;
+    background: color-mix(in srgb, var(--bg) 90%, transparent);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-soft);
+    transition: background-color .3s ease, border-color .3s ease;
+  }
+  .nav-logo {
+    font-family: 'Lora', serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--accent);
+    letter-spacing: -0.5px;
+  }
+  .nav-right { display: flex; align-items: center; gap: 32px; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* Theme toggle */
+  .theme-toggle {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text);
+    transition: all .25s ease;
+    font-size: 16px;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); transform: rotate(15deg); }
+  .theme-toggle .sun { display: none; }
+  :root[data-theme="light"] .theme-toggle .sun { display: inline; }
+  :root[data-theme="light"] .theme-toggle .moon { display: none; }
+
+  /* ── SECTIONS ── */
+  section { position: relative; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    align-items: center;
+    padding: 130px 60px 80px;
+    gap: 60px;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+    padding: 6px 14px;
+    border-radius: 4px;
+    margin-bottom: 28px;
+    animation: fadeUp .6s ease both;
+  }
+  .hero-name {
+    font-family: 'Lora', serif;
+    font-weight: 700;
+    font-size: clamp(44px, 5.5vw, 76px);
+    line-height: 1.05;
+    letter-spacing: -2px;
+    animation: fadeUp .6s .1s ease both;
+  }
+  .hero-name em {
+    color: var(--accent);
+    font-style: italic;
+    font-weight: 600;
+  }
+  .hero-role {
+    font-size: 17px;
+    color: var(--text-muted);
+    margin-top: 18px;
+    font-weight: 400;
+    animation: fadeUp .6s .2s ease both;
+  }
+  .hero-summary {
+    margin-top: 26px;
+    font-size: 16px;
+    color: var(--text-muted);
+    max-width: 540px;
+    line-height: 1.75;
+    animation: fadeUp .6s .3s ease both;
+  }
+  .hero-cta {
+    display: flex; gap: 14px; margin-top: 36px;
+    animation: fadeUp .6s .4s ease both;
+  }
+  .btn {
+    padding: 13px 26px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all .25s ease;
+    letter-spacing: .3px;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border: 1px solid var(--accent);
+  }
+  .btn-primary:hover { background: var(--accent-strong); transform: translateY(-2px); box-shadow: var(--shadow); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+  .btn-ghost:hover { background: var(--accent-soft); transform: translateY(-2px); }
+
+  /* hero right — info card */
+  .hero-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    animation: fadeUp .6s .2s ease both;
+  }
+  .hero-card-header {
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border-soft);
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .header-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+  .hero-card-body { padding: 24px; font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+  .info-row {
+    display: flex; justify-content: space-between;
+    padding: 11px 0;
+    border-bottom: 1px dashed var(--border-soft);
+  }
+  .info-row:last-child { border-bottom: none; }
+  .info-key { color: var(--text-muted); }
+  .info-val { color: var(--text); font-weight: 500; }
+  .info-val.highlight { color: var(--accent); }
+  .info-val.gold { color: var(--highlight); }
+
+  /* ── SECTIONS GENERAL ── */
+  .section-pad {
+    padding: 100px 60px;
+    border-top: 1px solid var(--border-soft);
+  }
+  .section-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .section-title {
+    font-size: clamp(32px, 4vw, 50px);
+    margin-bottom: 60px;
+    color: var(--text);
+  }
+  .section-title em { color: var(--accent); font-style: italic; }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 28px;
+    transition: all .25s ease;
+  }
+  .skill-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+  }
+  .skill-card-icon {
+    font-size: 24px;
+    margin-bottom: 14px;
+    width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--accent-soft);
+    border-radius: 8px;
+  }
+  .skill-card-title {
+    font-family: 'Lora', serif;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 11px;
+    border-radius: 3px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+
+  /* ── EXPERIENCE ── */
+  .timeline { position: relative; padding-left: 38px; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 8px; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), var(--border));
+  }
+  .timeline-item { position: relative; margin-bottom: 56px; }
+  .timeline-dot {
+    position: absolute;
+    left: -44px; top: 6px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 3px solid var(--bg);
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+  .timeline-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: .5px;
+    margin-bottom: 8px;
+  }
+  .timeline-role {
+    font-family: 'Lora', serif;
+    font-weight: 600;
+    font-size: 24px;
+    margin-bottom: 4px;
+    color: var(--text);
+  }
+  .timeline-company {
+    color: var(--accent);
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    margin-right: 8px;
+    letter-spacing: .3px;
+  }
+  .badge-promo {
+    background: var(--highlight-soft);
+    color: var(--highlight);
+    border: 1px solid color-mix(in srgb, var(--highlight) 35%, transparent);
+  }
+  .badge-lead {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+  .project-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 26px;
+    margin-bottom: 16px;
+    transition: border-color .2s;
+  }
+  .project-block:hover { border-color: var(--accent); }
+  .project-title {
+    font-family: 'Lora', serif;
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .project-bullets { list-style: none; }
+  .project-bullets li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 10px;
+    font-size: 14.5px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+  .project-bullets li::before {
+    content: '▸';
+    position: absolute; left: 0;
+    color: var(--highlight);
+    font-size: 13px;
+    top: 1px;
+  }
+  .project-bullets li strong { color: var(--text); font-weight: 600; }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border-soft); }
+  .stack-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 3px;
+    background: var(--highlight-soft);
+    color: var(--highlight);
+    border: 1px solid color-mix(in srgb, var(--highlight) 25%, transparent);
+  }
+
+  /* ── EDUCATION ── */
+  .edu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .edu-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 28px;
+    transition: all .25s ease;
+  }
+  .edu-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: var(--shadow); }
+  .edu-degree {
+    font-family: 'Lora', serif;
+    font-weight: 600;
+    font-size: 19px;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+  .edu-institution { color: var(--text-muted); font-size: 14px; margin-bottom: 14px; }
+  .edu-score {
+    font-size: 36px;
+    font-family: 'Lora', serif;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .edu-score-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .edu-year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 14px;
+  }
+
+  /* ── CERTIFICATIONS ── */
+  .cert-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+  .cert-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 28px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    transition: all .25s ease;
+  }
+  .cert-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: var(--shadow); }
+  .cert-icon {
+    font-size: 22px;
+    width: 52px; height: 52px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+  .cert-content { flex: 1; }
+  .cert-title {
+    font-family: 'Lora', serif;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 4px;
+    color: var(--text);
+  }
+  .cert-issuer { color: var(--accent); font-size: 14px; font-weight: 500; margin-bottom: 8px; }
+  .cert-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 10px; line-height: 1.6; }
+  .cert-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--text-muted);
+    letter-spacing: .5px;
+  }
+  .cert-skills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+
+  /* ── CONTACT ── */
+  #contact { text-align: center; }
+  .contact-title {
+    font-size: clamp(36px, 5.5vw, 64px);
+    line-height: 1.1;
+    margin-bottom: 20px;
+    color: var(--text);
+  }
+  .contact-title em { color: var(--accent); font-style: italic; }
+  .contact-sub {
+    color: var(--text-muted);
+    max-width: 540px;
+    margin: 0 auto 40px;
+    font-size: 16px;
+  }
+  .contact-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+  .contact-link {
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px 26px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all .25s ease;
+    background: var(--card);
+  }
+  .contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); box-shadow: var(--shadow); }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 26px 60px;
+    border-top: 1px solid var(--border-soft);
+    display: flex; justify-content: space-between; align-items: center;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 14px 22px; }
+    #hero { grid-template-columns: 1fr; padding: 110px 22px 60px; gap: 40px; }
+    .section-pad { padding: 70px 22px; }
+    footer { padding: 22px; flex-direction: column; gap: 8px; text-align: center; }
+    .skills-grid, .edu-grid, .cert-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .timeline { padding-left: 28px; }
+    .timeline-dot { left: -34px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">K · S</div>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <span class="moon">🌙</span>
+      <span class="sun">☀️</span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Available for opportunities</div>
+    <h1 class="hero-name">Karanam<br/>Keerthana<br/><em>Sharma</em></h1>
+    <p class="hero-role">Backend &amp; Integration Engineer · Accenture · India</p>
+    <p class="hero-summary">
+      Designing Java Spring Boot microservices, event-driven architectures, and AI-assisted
+      migration platforms. Currently leading the Data Plane and SDK development for UIMP —
+      Accenture's Universal Integration Migration Platform.
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary">Get in touch</a>
+      <a href="#experience" class="btn btn-ghost">View work</a>
+    </div>
+  </div>
+
+  <div class="hero-card">
+    <div class="hero-card-header">
+      <span class="header-dot"></span>
+      <span>profile · accenture</span>
+    </div>
+    <div class="hero-card-body">
+      <div class="info-row"><span class="info-key">Role</span><span class="info-val">Packaged App Development Analyst</span></div>
+      <div class="info-row"><span class="info-key">Status</span><span class="info-val gold">Promoted · Dec 2025</span></div>
+      <div class="info-row"><span class="info-key">Lead</span><span class="info-val highlight">UIMP Data Plane</span></div>
+      <div class="info-row"><span class="info-key">Core Stack</span><span class="info-val">Java · Spring Boot · AWS</span></div>
+      <div class="info-row"><span class="info-key">Specialty</span><span class="info-val">Event-Driven · LLM Integration</span></div>
+      <div class="info-row"><span class="info-key">Location</span><span class="info-val">India · Remote</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="section-pad">
+  <div class="section-label">What I work with</div>
+  <h2 class="section-title reveal">Technical <em>Skills</em></h2>
+
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-card-icon">⚙️</div>
+      <div class="skill-card-title">Languages &amp; Frameworks</div>
+      <div class="skill-tags">
+        <span class="tag">Java</span>
+        <span class="tag">Spring Boot</span>
+        <span class="tag">REST APIs</span>
+        <span class="tag">Apache Camel</span>
+        <span class="tag">MuleSoft</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-icon">☁️</div>
+      <div class="skill-card-title">Cloud &amp; Infrastructure</div>
+      <div class="skill-tags">
+        <span class="tag">AWS Lambda</span>
+        <span class="tag">AWS SNS</span>
+        <span class="tag">AWS ECS</span>
+        <span class="tag">AWS S3</span>
+        <span class="tag">Kubernetes</span>
+        <span class="tag">Azure</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-icon">🤖</div>
+      <div class="skill-card-title">AI / LLM</div>
+      <div class="skill-tags">
+        <span class="tag">OpenAI / ChatGPT</span>
+        <span class="tag">Prompt Engineering</span>
+        <span class="tag">Gen-Eval-Opt Pattern</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-icon">📨</div>
+      <div class="skill-card-title">Messaging &amp; Streaming</div>
+      <div class="skill-tags">
+        <span class="tag">Apache Kafka</span>
+        <span class="tag">RabbitMQ</span>
+        <span class="tag">Amazon SNS</span>
+        <span class="tag">Event-Driven</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-icon">🗄️</div>
+      <div class="skill-card-title">Database &amp; Storage</div>
+      <div class="skill-tags">
+        <span class="tag">MySQL</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">Minio</span>
+        <span class="tag">S3 Artifact Store</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-icon">🔗</div>
+      <div class="skill-card-title">Integration &amp; Patterns</div>
+      <div class="skill-tags">
+        <span class="tag">SDK Design</span>
+        <span class="tag">Microservices</span>
+        <span class="tag">Serverless</span>
+        <span class="tag">Cloud-Native</span>
+        <span class="tag">mTLS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="section-pad">
+  <div class="section-label">Where I've worked</div>
+  <h2 class="section-title reveal">Professional <em>Experience</em></h2>
+
+  <div class="timeline">
+
+    <!-- UIMP — current/most recent -->
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">JAN 2026 — PRESENT</div>
+      <div class="timeline-role">Data Plane Lead — UIMP</div>
+      <div class="timeline-company">Accenture · Universal Integration Migration Platform</div>
+      <span class="badge badge-lead">⭐ Leading Data Plane</span>
+      <span class="badge badge-promo">⬆ Promoted Dec 2025</span>
+
+      <div class="project-block">
+        <div class="project-title">▸ UIMP — Universal Integration Migration Platform</div>
+        <ul class="project-bullets">
+          <li><strong>Led the Data Plane end-to-end</strong> — owned design, implementation, and delivery of the entire write-path event publishing infrastructure powering all UIMP agents.</li>
+          <li>Architected and built the <strong>uimp-agent-txn-core SDK</strong> on Spring Boot — a production-grade library that consolidates ~40 infrastructure concerns previously duplicated across 14 agents.</li>
+          <li>Designed a <strong>3-library SDK architecture</strong> (Foundation + TXN Core + CPA Core) with strict dependency boundaries to enforce separation between the data plane, control plane, and shared utilities.</li>
+          <li>Implemented Java 21 <strong>ScopedValue</strong>-based correlation propagation, K8s-aware mTLS auto-discovery with hot-reload, and a partitioned transactional outbox with parallel pollers.</li>
+          <li>Defined 9 canonical event types with strict schema validation, eliminating an entire class of production bugs from typos, missing fields, and prohibited payload data.</li>
+          <li>Built RabbitMQ publisher infrastructure with quorum queues, async pipelined confirms, lock-free channel pools, and graceful 3-state shutdown — sustaining 10,000+ msg/sec per instance.</li>
+        </ul>
+        <div class="project-stack">
+          <span class="stack-tag">Java 21</span>
+          <span class="stack-tag">Spring Boot</span>
+          <span class="stack-tag">RabbitMQ</span>
+          <span class="stack-tag">Apache Camel</span>
+          <span class="stack-tag">Kubernetes</span>
+          <span class="stack-tag">mTLS</span>
+          <span class="stack-tag">SDK Design</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accenture promoted -->
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">DEC 2025 — PRESENT</div>
+      <div class="timeline-role">Packaged App Development Analyst</div>
+      <div class="timeline-company">Accenture</div>
+
+      <div class="project-block">
+        <div class="project-title">▸ Project MARS — MuleSoft → Azure Integration Services Migration</div>
+        <ul class="project-bullets">
+          <li>Developed an AI-assisted migration solution converting MuleSoft projects into Azure Integration Services (AIS) artifacts using OpenAI/ChatGPT.</li>
+          <li>Designed a <strong>Generator–Evaluator–Optimizer framework</strong> to iteratively refine migration outputs, significantly improving accuracy and acceptance rates.</li>
+          <li>Implemented Apache Kafka for event streaming across pipeline stages (ingest → generate → evaluate → optimize → publish), enabling parallelism and high throughput.</li>
+          <li>Used Minio as an artifact store for source inputs, intermediate versions, and generated outputs with full traceability and re-run support.</li>
+          <li>Deployed the platform on Kubernetes for consistent environments, autoscaling, and safe rollouts.</li>
+          <li>Created prompt templates and evaluation rubrics to reduce hallucinations and standardize generated outputs.</li>
+        </ul>
+        <div class="project-stack">
+          <span class="stack-tag">OpenAI</span>
+          <span class="stack-tag">Apache Kafka</span>
+          <span class="stack-tag">Kubernetes</span>
+          <span class="stack-tag">Minio</span>
+          <span class="stack-tag">Azure</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Associate -->
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">JUN 2024 — NOV 2025</div>
+      <div class="timeline-role">Packaged App Development Associate</div>
+      <div class="timeline-company">Accenture</div>
+
+      <div class="project-block">
+        <div class="project-title">▸ Project IMA — TIBCO → Apache Camel Migration (PoC)</div>
+        <ul class="project-bullets">
+          <li>Built a PoC to migrate integration workflows from TIBCO to Apache Camel by generating route templates, mappings, and transformation logic using OpenAI/LLMs.</li>
+          <li>Designed a serverless microservices pipeline on AWS Lambda to parse source assets, transform configurations, validate outputs, and package deliverables.</li>
+          <li>Implemented event-driven orchestration using Amazon SNS to decouple stages and enable asynchronous processing, retries, and scalable fan-out.</li>
+          <li>Automated migration end-to-end, improving output consistency and significantly reducing manual conversion effort.</li>
+        </ul>
+        <div class="project-stack">
+          <span class="stack-tag">AWS Lambda</span>
+          <span class="stack-tag">Amazon SNS</span>
+          <span class="stack-tag">Apache Camel</span>
+          <span class="stack-tag">OpenAI</span>
+          <span class="stack-tag">Java</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="section-pad">
+  <div class="section-label">Academic background</div>
+  <h2 class="section-title reveal"><em>Education</em></h2>
+
+  <div class="edu-grid">
+    <div class="edu-card reveal">
+      <div class="edu-degree">B.Tech — ECE</div>
+      <div class="edu-institution">GITAM School of Technology</div>
+      <div class="edu-score">9.71</div>
+      <div class="edu-score-label">CGPA</div>
+      <div class="edu-year">2020 – 2024</div>
+    </div>
+    <div class="edu-card reveal">
+      <div class="edu-degree">Intermediate (MPC)</div>
+      <div class="edu-institution">Balayesu Junior College</div>
+      <div class="edu-score">97.2%</div>
+      <div class="edu-score-label">Percentage</div>
+      <div class="edu-year">2018 – 2020</div>
+    </div>
+    <div class="edu-card reveal">
+      <div class="edu-degree">SSC</div>
+      <div class="edu-institution">Vailankanni Matha Vidyala</div>
+      <div class="edu-score">10.0</div>
+      <div class="edu-score-label">Perfect Score</div>
+      <div class="edu-year">2018</div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications" class="section-pad">
+  <div class="section-label">Continuous learning</div>
+  <h2 class="section-title reveal"><em>Certifications</em></h2>
+
+  <div class="cert-grid">
+    <div class="cert-card reveal">
+      <div class="cert-icon">🤖</div>
+      <div class="cert-content">
+        <div class="cert-title">AI Tools Workshop</div>
+        <div class="cert-issuer">be10x</div>
+        <div class="cert-desc">
+          Certificate of Completion for AI Tools and ChatGPT Workshop — covering creating AI-driven presentations, data analysis, and code/debug acceleration with AI assistants.
+        </div>
+        <div class="cert-skills">
+          <span class="tag">ChatGPT</span>
+          <span class="tag">AI Productivity</span>
+          <span class="tag">Prompt Engineering</span>
+        </div>
+        <div class="cert-date" style="margin-top:12px;">Issued · May 3rd, 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section-pad">
+  <div class="section-label">Let's connect</div>
+  <h2 class="contact-title reveal">Let's build<br/><em>something great</em></h2>
+  <p class="contact-sub reveal">Open to backend engineering, cloud-native architecture, and AI integration opportunities. Always happy to discuss technical challenges.</p>
+  <div class="contact-links reveal">
+    <a href="mailto:karanamkeerthanasharma@gmail.com" class="contact-link">
+      <span>✉</span> karanamkeerthanasharma@gmail.com
+    </a>
+    <a href="tel:+917981847771" class="contact-link">
+      <span>📞</span> +91 79818 47771
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 Karanam Keerthana Sharma</span>
+  <span>Backend &amp; Integration Engineer · India</span>
+</footer>
+
+<script>
+  // ── THEME TOGGLE ──
+  function toggleTheme() {
+    const root = document.documentElement;
+    const current = root.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('portfolio-theme', next); } catch (e) {}
+  }
+  // Load saved theme
+  try {
+    const saved = localStorage.getItem('portfolio-theme');
+    if (saved) document.documentElement.setAttribute('data-theme', saved);
+  } catch (e) {}
+
+  // ── SCROLL REVEAL ──
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 70);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
