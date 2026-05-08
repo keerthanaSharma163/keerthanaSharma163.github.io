@@ -422,6 +422,53 @@
     margin-top: 14px;
   }
 
+  /* ── ACHIEVEMENTS ── */
+  .achieve-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .achieve-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 28px;
+    text-align: center;
+    transition: all .25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .achieve-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--highlight));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .3s ease;
+  }
+  .achieve-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+  }
+  .achieve-card:hover::before { transform: scaleX(1); }
+  .achieve-icon {
+    font-size: 36px;
+    margin-bottom: 14px;
+    display: inline-block;
+  }
+  .achieve-title {
+    font-family: 'Lora', serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--text);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .achieve-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
   /* ── CERTIFICATIONS ── */
   .cert-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
   .cert-card {
@@ -516,14 +563,112 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
-    nav { padding: 14px 22px; }
-    #hero { grid-template-columns: 1fr; padding: 110px 22px 60px; gap: 40px; }
-    .section-pad { padding: 70px 22px; }
-    footer { padding: 22px; flex-direction: column; gap: 8px; text-align: center; }
-    .skills-grid, .edu-grid, .cert-grid { grid-template-columns: 1fr; }
+    body { font-size: 14.5px; }
+
+    nav { padding: 12px 18px; }
+    .nav-logo { font-size: 19px; }
     .nav-links { display: none; }
-    .timeline { padding-left: 28px; }
-    .timeline-dot { left: -34px; }
+    .nav-right { gap: 12px; }
+    .theme-toggle { width: 34px; height: 34px; font-size: 14px; }
+
+    /* HERO */
+    #hero {
+      grid-template-columns: 1fr;
+      padding: 90px 18px 40px;
+      gap: 28px;
+      min-height: auto;
+    }
+    .hero-tag { font-size: 10.5px; padding: 5px 11px; margin-bottom: 18px; letter-spacing: 1.2px; }
+    .hero-name { font-size: clamp(36px, 11vw, 56px); letter-spacing: -1.2px; line-height: 1.05; }
+    .hero-role { font-size: 14.5px; margin-top: 14px; }
+    .hero-summary { font-size: 14.5px; margin-top: 18px; line-height: 1.65; }
+    .hero-cta { gap: 10px; margin-top: 24px; flex-wrap: wrap; }
+    .btn { padding: 11px 20px; font-size: 13px; }
+
+    .hero-card-header { padding: 14px 16px; font-size: 12px; }
+    .hero-card-body { padding: 16px; font-size: 12px; }
+    .info-row { padding: 9px 0; flex-wrap: wrap; gap: 4px; }
+    .info-key { font-size: 11.5px; }
+    .info-val { font-size: 12px; text-align: right; }
+
+    /* SECTIONS */
+    .section-pad { padding: 50px 18px; }
+    .section-label { font-size: 11px; letter-spacing: 2px; margin-bottom: 10px; }
+    .section-title { font-size: clamp(26px, 7vw, 38px); margin-bottom: 32px; letter-spacing: -1px; }
+
+    /* GRIDS */
+    .skills-grid, .edu-grid, .cert-grid, .achieve-grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    /* SKILLS */
+    .skill-card { padding: 22px; }
+    .skill-card-icon { width: 40px; height: 40px; font-size: 20px; margin-bottom: 12px; }
+    .skill-card-title { font-size: 16px; margin-bottom: 10px; }
+    .tag { font-size: 11.5px; padding: 3px 9px; }
+
+    /* EXPERIENCE */
+    .timeline { padding-left: 24px; }
+    .timeline::before { left: 0; }
+    .timeline-dot { left: -29px; width: 10px; height: 10px; }
+    .timeline-item { margin-bottom: 38px; }
+    .timeline-meta { font-size: 11px; }
+    .timeline-role { font-size: 19px; line-height: 1.3; }
+    .timeline-company { font-size: 13.5px; line-height: 1.5; margin-bottom: 14px; }
+    .badge { font-size: 11px; padding: 3px 10px; margin-bottom: 12px; }
+    .project-block { padding: 18px; }
+    .project-title { font-size: 15px; margin-bottom: 12px; line-height: 1.4; }
+    .project-bullets li { font-size: 13.5px; padding-left: 16px; margin-bottom: 9px; line-height: 1.6; }
+    .project-bullets li::before { font-size: 11px; }
+    .project-stack { gap: 5px; margin-top: 12px; padding-top: 12px; }
+    .stack-tag { font-size: 10.5px; padding: 2px 7px; }
+
+    /* EDUCATION */
+    .edu-card { padding: 22px; }
+    .edu-degree { font-size: 17px; }
+    .edu-institution { font-size: 13px; margin-bottom: 12px; }
+    .edu-score { font-size: 30px; }
+    .edu-score-label { font-size: 11px; }
+
+    /* ACHIEVEMENTS */
+    .achieve-card { padding: 22px 18px; }
+    .achieve-icon { font-size: 30px; margin-bottom: 10px; }
+    .achieve-title { font-size: 16px; margin-bottom: 8px; }
+    .achieve-desc { font-size: 13.5px; line-height: 1.55; }
+
+    /* CERTIFICATIONS */
+    .cert-card { padding: 20px; gap: 14px; flex-direction: column; align-items: flex-start; }
+    .cert-icon { width: 44px; height: 44px; font-size: 18px; }
+    .cert-title { font-size: 16px; }
+    .cert-desc { font-size: 13.5px; }
+
+    /* CONTACT */
+    .contact-title { font-size: clamp(28px, 8.5vw, 48px); letter-spacing: -1.2px; }
+    .contact-sub { font-size: 14.5px; margin-bottom: 28px; padding: 0 6px; }
+    .contact-links { gap: 10px; flex-direction: column; align-items: stretch; padding: 0 8px; }
+    .contact-link {
+      padding: 13px 18px;
+      font-size: 13px;
+      justify-content: center;
+      word-break: break-word;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 18px;
+      flex-direction: column;
+      gap: 6px;
+      text-align: center;
+      font-size: 12px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .hero-name { font-size: 34px; }
+    .section-pad { padding: 42px 16px; }
+    nav { padding: 10px 14px; }
+    #hero { padding: 80px 16px 36px; }
   }
 </style>
 </head>
@@ -537,6 +682,7 @@
       <a href="#skills">Skills</a>
       <a href="#experience">Experience</a>
       <a href="#education">Education</a>
+      <a href="#achievements">Achievements</a>
       <a href="#certifications">Certifications</a>
       <a href="#contact">Contact</a>
     </div>
@@ -573,10 +719,10 @@
     </div>
     <div class="hero-card-body">
       <div class="info-row"><span class="info-key">Role</span><span class="info-val">Packaged App Development Analyst</span></div>
-      <div class="info-row"><span class="info-key">Status</span><span class="info-val gold">Promoted · Dec 2025</span></div>
+      <div class="info-row"><span class="info-key">Status</span><span class="info-val gold">Promoted · December 2025</span></div>
       <div class="info-row"><span class="info-key">Lead</span><span class="info-val highlight">UIMP Data Plane</span></div>
       <div class="info-row"><span class="info-key">Core Stack</span><span class="info-val">Java · Spring Boot · AWS</span></div>
-      <div class="info-row"><span class="info-key">Specialty</span><span class="info-val">Event-Driven · LLM Integration</span></div>
+      <div class="info-row"><span class="info-key">Speciality</span><span class="info-val">Event-Driven · LLM Integration</span></div>
       <div class="info-row"><span class="info-key">Location</span><span class="info-val">India · Remote</span></div>
     </div>
   </div>
@@ -664,11 +810,11 @@
     <!-- UIMP — current/most recent -->
     <div class="timeline-item reveal">
       <div class="timeline-dot"></div>
-      <div class="timeline-meta">JAN 2026 — PRESENT</div>
+      <div class="timeline-meta">JANUARY 2026 — PRESENT</div>
       <div class="timeline-role">Data Plane Lead — UIMP</div>
       <div class="timeline-company">Accenture Research and Development · Universal Integration Migration Platform</div>
       <span class="badge badge-lead">⭐ Leading Data Plane</span>
-      <span class="badge badge-promo">⬆ Promoted Dec 2025</span>
+      <span class="badge badge-promo">⬆ Promoted December 2025</span>
 
       <div class="project-block">
         <div class="project-title">▸ UIMP — Universal Integration Migration Platform</div>
@@ -698,7 +844,7 @@
     <!-- Accenture promoted -->
     <div class="timeline-item reveal">
       <div class="timeline-dot"></div>
-      <div class="timeline-meta">DEC 2025 — PRESENT</div>
+      <div class="timeline-meta">DECEMBER 2025 — PRESENT</div>
       <div class="timeline-role">Packaged App Development Analyst</div>
       <div class="timeline-company">Accenture</div>
 
@@ -706,8 +852,8 @@
         <div class="project-title">▸ Project MARS — MuleSoft → Azure Integration Services Migration</div>
         <ul class="project-bullets">
           <li>Developed an AI-assisted migration solution converting MuleSoft projects into Azure Integration Services (AIS) artifacts using OpenAI/ChatGPT.</li>
-          <li>Designed a <strong>Generator–Evaluator–Optimizer framework</strong> to iteratively refine migration outputs, significantly improving accuracy and acceptance rates.</li>
-          <li>Implemented Apache Kafka for event streaming across pipeline stages (ingest → generate → evaluate → optimize → publish), enabling parallelism and high throughput.</li>
+          <li>Designed a <strong>Generator–Evaluator–Optimiser framework</strong> to iteratively refine migration outputs, significantly improving accuracy and acceptance rates.</li>
+          <li>Implemented Apache Kafka for event streaming across pipeline stages (ingest → generate → evaluate → optimise → publish), enabling parallelism and high throughput.</li>
           <li>Used Minio as an artifact store for source inputs, intermediate versions, and generated outputs with full traceability and re-run support.</li>
           <li>Deployed the platform on Kubernetes for consistent environments, autoscaling, and safe rollouts.</li>
           <li>Created prompt templates and evaluation rubrics to reduce hallucinations and standardize generated outputs.</li>
@@ -725,7 +871,7 @@
     <!-- Associate -->
     <div class="timeline-item reveal">
       <div class="timeline-dot"></div>
-      <div class="timeline-meta">JUN 2024 — NOV 2025</div>
+      <div class="timeline-meta">JUNE 2024 — NOVEMBER 2025</div>
       <div class="timeline-role">Packaged App Development Associate</div>
       <div class="timeline-company">Accenture</div>
 
@@ -780,6 +926,30 @@
   </div>
 </section>
 
+<!-- ACHIEVEMENTS -->
+<section id="achievements" class="section-pad">
+  <div class="section-label">Recognition &amp; honors</div>
+  <h2 class="section-title reveal"><em>Achievements</em></h2>
+
+  <div class="achieve-grid">
+    <div class="achieve-card reveal">
+      <div class="achieve-icon">🏅</div>
+      <div class="achieve-title">Gold Medalist</div>
+      <div class="achieve-desc">First Rank in B.Tech — GITAM School of Technology, recognized for academic excellence with a 9.71 CGPA.</div>
+    </div>
+    <div class="achieve-card reveal">
+      <div class="achieve-icon">🎖️</div>
+      <div class="achieve-title">NCC 'C' Certificate</div>
+      <div class="achieve-desc">Holder of the National Cadet Corps 'C' Certificate with the rank of <strong>Sergeant</strong> — demonstrating leadership, discipline, and service.</div>
+    </div>
+    <div class="achieve-card reveal">
+      <div class="achieve-icon">🚀</div>
+      <div class="achieve-title">1st Prize — World Space Week 2017</div>
+      <div class="achieve-desc">Awarded First Prize during World Space Week 2017 for outstanding performance and innovation.</div>
+    </div>
+  </div>
+</section>
+
 <!-- CERTIFICATIONS -->
 <section id="certifications" class="section-pad">
   <div class="section-label">Continuous learning</div>
@@ -799,7 +969,7 @@
           <span class="tag">AI Productivity</span>
           <span class="tag">Prompt Engineering</span>
         </div>
-        <div class="cert-date" style="margin-top:12px;">Issued · May 3rd, 2026</div>
+        <div class="cert-date" style="margin-top:12px;">Issued · 3 May 2026</div>
       </div>
     </div>
   </div>
